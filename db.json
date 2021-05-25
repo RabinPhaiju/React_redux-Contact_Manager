@@ -1,0 +1,23 @@
+{
+  "contacts": [
+    {
+      "name": "Salmana",
+      "email": "salmana@gmail.com",
+      "phone": "985645",
+      "id": 1
+    },
+    {
+      "name": "Rabina",
+      "email": "rabina@gmail.com",
+      "phone": "34566756",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "rbnph",
+      "user": "Rabin"
+    }
+  ]
+}
