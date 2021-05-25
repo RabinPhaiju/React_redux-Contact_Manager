@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 import Contacts from "./components/contacts/Contacts";
 import AddContact from "./components/contacts/AddContact";
 import EditContact from "./components/contacts/EditContact";
@@ -10,6 +11,7 @@ import NotFound from "./components/pages/notfound/NotFound";
 import store from "./redux/store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const App = () => {
@@ -28,6 +30,7 @@ const App = () => {
             </Switch>
           </div>
         </div>
+        <ToastContainer />
       </Router>
     </Provider>
   );

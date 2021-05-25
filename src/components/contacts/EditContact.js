@@ -1,9 +1,11 @@
 import { getContact, updateContact } from "../../redux/actions/contactAction";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { setAlert } from "../../redux/actions/alertAction";
+import { useParams, useHistory } from "react-router-dom";
 
 const AddContact = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -12,7 +14,6 @@ const AddContact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getContact(id));
@@ -30,17 +31,17 @@ const AddContact = () => {
     e.preventDefault();
     // Check For Errors
     if (name === "") {
-      setErrors({ name: "Name is required" });
+      dispatch(setAlert("Name is required", "error"));
       return;
     }
 
     if (email === "") {
-      setErrors({ email: "Email is required" });
+      dispatch(setAlert("Email is required", "error"));
       return;
     }
 
     if (phone === "") {
-      setErrors({ phone: "Phone is required" });
+      dispatch(setAlert("Phone is required", "error"));
       return;
     }
 
@@ -52,19 +53,19 @@ const AddContact = () => {
 
     //// SUBMIT CONTACT ////
     dispatch(updateContact(id, newContact));
-
-    // Clear State
-    setName("");
-    setEmail("");
-    setPhone("");
-    setErrors({});
+    dispatch(setAlert("Contact edited.", "success"));
+    if (newContact.name) {
+      setTimeout(function () {
+        history.push("/");
+      }, 1000);
+    }
   };
   return (
-    <div className='card mb-3'>
+    <div className='card mb-3' style={{ width: "400px" }}>
       <div className='card-header'>Edit Contact</div>
-      <div className='card-body w-75'>
+      <div className='card-body'>
         <form onSubmit={onSubmit}>
-          <div className='form-control d-flex justify-content-around'>
+          <div className='form-control d-flex justify-content-between'>
             <h6>Name : </h6>
             <input
               type='text'
@@ -72,9 +73,8 @@ const AddContact = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <div className='text-danger'>{errors && errors.name}</div>
           </div>
-          <div className='form-control d-flex justify-content-around'>
+          <div className='form-control d-flex justify-content-between'>
             <h6>Email : </h6>
             <input
               type='email'
@@ -82,9 +82,8 @@ const AddContact = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div className='text-danger'>{errors && errors.email}</div>
           </div>
-          <div className='form-control d-flex justify-content-around'>
+          <div className='form-control d-flex justify-content-between'>
             <h6>Phone : </h6>
             <input
               type='number'
@@ -92,7 +91,6 @@ const AddContact = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-            <div className='text-danger'>{errors && errors.phone}</div>
           </div>
           <input type='submit' value='Edit Contact' className='btn btn-light btn-block' />
         </form>

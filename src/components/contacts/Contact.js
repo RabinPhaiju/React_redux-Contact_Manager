@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/actions/contactAction";
+import { setAlert } from "../../redux/actions/alertAction";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,6 +11,7 @@ const Contact = ({ contact }) => {
   const onDeleteClick = (id) => {
     //// DELETE CONTACT ////
     dispatch(deleteContact(id));
+    dispatch(setAlert("Contact deleted.", "success"));
   };
   return (
     <div className='card card-body mb-3'>

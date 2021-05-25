@@ -1,15 +1,15 @@
 {
   "contacts": [
     {
-      "name": "Salmana",
-      "email": "salmana@gmail.com",
-      "phone": "985645",
+      "name": "Rabin",
+      "email": "rabin@gmail.com",
+      "phone": "343434",
       "id": 1
     },
     {
-      "name": "Rabina",
-      "email": "rabina@gmail.com",
-      "phone": "34566756",
+      "name": "Heros",
+      "email": "hers@gmail.com",
+      "phone": "394898711",
       "id": 2
     }
   ],
